@@ -31,9 +31,9 @@
 # .idea/artifacts
 # .idea/compiler.xml
 # .idea/modules.xml
-# .idea/*.iml
+#.idea/*.iml
 # .idea/modules
-# *.iml
+#*.iml
 # *.ipr
 
 # CMake
@@ -69,8 +69,10 @@ fabric.properties
 # Android studio 3.1+ serialized cache file
 .idea/caches/build_file_checksums.ser
 point-of-sale-project.json
+
 .idea/*
 venv/*
+.idea\
 attendance-list.json
 *.pyc
 config/__pycache__/sendmail.cpython-37.pyc
