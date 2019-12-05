@@ -10,3 +10,6 @@ class FireStoreService:
         default_app = initialize_app(cred)
         self.db = firestore.client()
         self.student_ref = self.db.collection('students')
+
+    def create_worker(self,json):
+        self.worker_ref.document(json['id']).set(json)
