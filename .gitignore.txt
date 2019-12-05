@@ -68,9 +68,10 @@ fabric.properties
 
 # Android studio 3.1+ serialized cache file
 .idea/caches/build_file_checksums.ser
-point-of-sale-project.json
+attendance-list-firebase.json
 .idea/*
 venv/*
+
 *.pyc
 config/__pycache__/sendmail.cpython-37.pyc
 models/__pycache__/idproduct.cpython-37.pyc
