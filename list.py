@@ -7,6 +7,14 @@ from configuration.firebase_manager import FireStoreService
 app = Flask(__name__)
 fb_service = FireStoreService()
 
+@app.route('/', methods=['GET'])
+def index():
+    """
+    View for the landing page.
+    :return: redirection to product listings.
+    """
+    return render_template("header.html")
+
 @app.route('/create/worker', methods= ["GET","POST"])
 def create_worker():
     if request.method == 'GET':
