@@ -1,11 +1,15 @@
 import os
 import requests
 from models.response import Response
+from models.worker import Worker
 from flask import Flask, request, jsonify, render_template
 from configuration.firebase_manager import FireStoreService
 
+
+headers = {'Content-Type': "application/json", 'Accept': "application/json"}
 app = Flask(__name__)
 fb_service = FireStoreService()
+
 
 @app.route('/', methods=['GET'])
 def index():
@@ -15,20 +19,19 @@ def index():
     """
     return render_template("header.html")
 
-@app.route('/create/worker', methods= ["GET","POST"])
+
+@app.route('/create/worker', methods=['GET', 'POST'])
 def create_worker():
     if request.method == 'GET':
-        res = requests.get("http://localhost:5000/api/category/select",
+        res = requests.get("http://localhost:5000/api/worker/create",
                            headers=headers).json()
-        return render_template("create_product.html", categories=res['data'])
+        return render_template("create_worker.html", categories=res['data'])
     if request.method == 'POST':
         form = request.form
-        new_product = Product(form['id'], form['name'], form['details'],
-                              form['price'], form['quantity'], form['stock'],
-                              request.form.get('select_category'),
-                              form['image'])
+        new_product = Worker(form['id'], form['first_name'], form['last_name'],
+                             form['salary'])
         print(new_product)
-        res = requests.post("http://localhost:5000/api/product/create",
+        res = requests.post("http://localhost:5000/api/worker/create",
                             json=new_product.__dict__, headers=headers).json()
         print("res req: ", res)
         if res['status'] == 200:
