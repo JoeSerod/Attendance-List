@@ -14,3 +14,8 @@ class FireStoreService:
 
     def create_product(self, json):
         self.product_ref.document(json['id']).set(json)
+
+    def delete_product(self, json):
+
+        self.product_ref.document(json['id']).delete()
+        return {'deleted_id': json['id']}

@@ -53,6 +53,26 @@ def api_create_product():
         return jsonify(res.__dict__), 500
 
 
+@app.route('/api/product/delete', methods=["POST", "DELETE"])
+def api_product_delete():
+
+    try:
+        if request.method == 'POST':
+            product_id = request.json
+
+        if request.method == 'DELETE':
+            product_id = {"id": request.args.get('id')}
+
+        print(product_id)
+        data = fb_service.delete_product(product_id)
+        if data is None:
+            return jsonify(
+                Response.new_error("id not found", 404).__dict__), 404
+        res = Response.new_response(data)
+        return jsonify(res.__dict__), 200
+    except Exception as e:
+        return jsonify(Response.new_error(str(e), 500).__dict__), 500
+
 port = int(os.environ.get('PORT', 5000))
 if __name__ == '__main__':
     app.run(threaded=True, host='localhost', port=port)
