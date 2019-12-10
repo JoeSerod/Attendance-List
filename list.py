@@ -3,7 +3,7 @@ import requests
 import json
 from models.response import Response
 from models.worker import Worker
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify, render_template, redirect, url_for
 from configuration.firebase_manager import FireStoreService
 
 
@@ -35,7 +35,7 @@ def create_worker():
                             json=new_product.__dict__, headers=headers).json()
         print("res req: ", res)
         if res['status'] == 200:
-            return "hola"  # redirect to index
+            return redirect(url_for('index')) # redirect to index
         else:
             return jsonify(res), 500  # returns json error
 
