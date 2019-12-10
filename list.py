@@ -26,7 +26,7 @@ def create_worker():
     if request.method == "GET":
 
         return render_template("create_worker.html")
-    if request.method == 'POST':
+    if request.method == "POST":
         form = request.form
         new_product = Worker(form['id'], form['first_name'], form['last_name'],
                              form['salary'])
@@ -35,7 +35,7 @@ def create_worker():
                             json=new_product.__dict__, headers=headers).json()
         print("res req: ", res)
         if res['status'] == 200:
-            return redirect(url_for('index'))  # redirect to index
+            return "hola"  # redirect to index
         else:
             return jsonify(res), 500  # returns json error
 
