@@ -12,5 +12,5 @@ class FireStoreService:
         self.db = firestore.client()
         self.worker_ref = self.db.collection('worker')
 
-    def create_worker(self,json):
+    def create_worker(self, json):
         self.worker_ref.document(json['id']).set(json)

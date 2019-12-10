@@ -18,15 +18,14 @@ def index():
     View for the landing page.
     :return: redirection to product listings.
     """
-    return render_template("create_worker.html")
+    return render_template("index.html")
 
 
-@app.route('/create/worker', methods=['GET', 'POST'])
+@app.route('/worker/create', methods=["GET", "POST"])
 def create_worker():
-    if request.method == 'GET':
-        res = requests.get("http://localhost:5000/api/worker/create",
-                           headers=headers).json()
-        return render_template("create_worker.html", categories=res['data'])
+    if request.method == "GET":
+
+        return render_template("create_worker.html")
     if request.method == 'POST':
         form = request.form
         new_product = Worker(form['id'], form['first_name'], form['last_name'],
@@ -39,6 +38,7 @@ def create_worker():
             return redirect(url_for('index'))  # redirect to index
         else:
             return jsonify(res), 500  # returns json error
+
 
 @app.route('/api/worker/create', methods=["POST"])
 def api_create_worker():
