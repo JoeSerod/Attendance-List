@@ -1,8 +1,11 @@
 from flask import Flask, request, render_template, jsonify, redirect, url_for
 import os
 
-from flask import Flask
+import requests
+from configuration.firebase_manager import FireStoreService
+
 app = Flask(__name__)
+fb_service = FireStoreService()
 
 
 @app.route('/', methods=['GET'])
