@@ -1,5 +1,6 @@
 import os
 import requests
+import json
 from models.response import Response
 from models.worker import Worker
 from flask import Flask, request, jsonify, render_template
@@ -11,13 +12,13 @@ app = Flask(__name__)
 fb_service = FireStoreService()
 
 
-@app.route('/', methods=['GET'])
+@app.route('/', methods=["GET", "POST"])
 def index():
     """
     View for the landing page.
     :return: redirection to product listings.
     """
-    return render_template("header.html")
+    return render_template("create_worker.html")
 
 
 @app.route('/create/worker', methods=['GET', 'POST'])
