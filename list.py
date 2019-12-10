@@ -28,7 +28,7 @@ def create_product():
         return render_template("create_product.html")
     if request.method == "POST":
         form = request.form
-        new_product = Product(form['id'], form['product_name'],
+        new_product = Product(form['product_name'], form['id'],
                               form['product_details'], form['price'])
         print(new_product)
         res = requests.post("http://localhost:5000/api/product/create",
