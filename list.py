@@ -2,7 +2,7 @@ import os
 import requests
 import json
 from models.response import Response
-from models.worker import Worker
+from models.product import Product
 from flask import Flask, request, jsonify, render_template, redirect, url_for
 from configuration.firebase_manager import FireStoreService
 
@@ -21,17 +21,17 @@ def index():
     return render_template("index.html")
 
 
-@app.route('/worker/create', methods=["GET", "POST"])
-def create_worker():
+@app.route('/product/create', methods=["GET", "POST"])
+def create_product():
     if request.method == "GET":
 
-        return render_template("create_worker.html")
+        return render_template("create_product.html")
     if request.method == "POST":
         form = request.form
-        new_product = Worker(form['id'], form['first_name'], form['last_name'],
-                             form['salary'])
+        new_product = Product(form['id'], form['product_name'],
+                              form['product_details'], form['price'])
         print(new_product)
-        res = requests.post("http://localhost:5000/api/worker/create",
+        res = requests.post("http://localhost:5000/api/product/create",
                             json=new_product.__dict__, headers=headers).json()
         print("res req: ", res)
         if res['status'] == 200:
@@ -40,12 +40,12 @@ def create_worker():
             return jsonify(res), 500  # returns json error
 
 
-@app.route('/api/worker/create', methods=["POST"])
-def api_create_worker():
+@app.route('/api/product/create', methods=["POST"])
+def api_create_product():
 
     try:
         data = request.json
-        fb_service.create_worker(data)
+        fb_service.create_product(data)
         res = Response.new_response(None)
         return jsonify(res.__dict__), 200
     except Exception as e:

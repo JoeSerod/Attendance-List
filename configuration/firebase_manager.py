@@ -10,7 +10,7 @@ class FireStoreService:
         cred = credentials.Certificate('attendance-list.json')
         default_app = initialize_app(cred)
         self.db = firestore.client()
-        self.worker_ref = self.db.collection('worker')
+        self.product_ref = self.db.collection('product')
 
-    def create_worker(self, json):
-        self.worker_ref.document(json['id']).set(json)
+    def create_product(self, json):
+        self.product_ref.document(json['id']).set(json)
