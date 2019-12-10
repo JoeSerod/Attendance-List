@@ -1,0 +1,18 @@
+{% include "header.html" %}
+{% block body %}
+
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <center>
+            <h1 class="display-4">Team A - Final Student Project</h1>
+            <p class="lead">Welcome to our Final Project.</p>
+            {% for order in orders %}
+            
+                    <th scope="row"> {{order.id_user}} </th>
+                {% endfor %}
+        </center>
+    </div>
+</div>
+
+{% include "footer.html" %}
+{% endblock %}
