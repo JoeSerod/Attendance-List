@@ -1,5 +1,6 @@
 from firebase_admin import credentials, firestore, initialize_app
 
+
 class FireStoreService:
     """
     This class should handle reading & writing from and to firebase.
