@@ -17,4 +17,4 @@ class FireStoreService:
         self.product_ref.document(json['id']).set(json)
 
     def create_user(self, json):
-        self.product_ref.document(json['phone_number']).set(json)
+        self.user_ref.document(json['phone_number']).set(json)
