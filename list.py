@@ -58,12 +58,12 @@ def api_create_product():
 def create_user():
     if request.method == "GET":
 
-        return render_template("create_product.html")
+        return render_template("signin.html")
     if request.method == "POST":
         form = request.form
         new_product = User(form['phone_number'], form['name'],
-                              form['last_name'], form['e_mail'],
-                              form['password'])
+                           form['last_name'],
+                           form['e_mail'], form['password'])
         print(new_product)
         res = requests.post("http://localhost:5000/api/user/create",
                             json=new_product.__dict__, headers=headers).json()
