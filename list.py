@@ -3,6 +3,7 @@ import requests
 import json
 from models.response import Response
 from models.product import Product
+from models.user import User
 from flask import Flask, request, jsonify, render_template, redirect, url_for
 from configuration.firebase_manager import FireStoreService
 
@@ -60,8 +61,9 @@ def create_user():
         return render_template("create_product.html")
     if request.method == "POST":
         form = request.form
-        new_product = Product(form['product_name'], form['id'],
-                              form['product_details'], form['price'])
+        new_product = User(form['phone_number'], form['name'],
+                              form['last_name'], form['e_mail'],
+                              form['password'])
         print(new_product)
         res = requests.post("http://localhost:5000/api/user/create",
                             json=new_product.__dict__, headers=headers).json()
