@@ -11,6 +11,10 @@ class FireStoreService:
         default_app = initialize_app(cred)
         self.db = firestore.client()
         self.product_ref = self.db.collection('product')
+        self.user_ref = self.db.collection('user')
 
     def create_product(self, json):
         self.product_ref.document(json['id']).set(json)
+
+    def create_user(self, json):
+        self.product_ref.document(json['phone_number']).set(json)
