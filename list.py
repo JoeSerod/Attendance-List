@@ -87,6 +87,28 @@ def api_create_user():
         return jsonify(res.__dict__), 500
 
 
+@app.route('/user/login', methods=['POST', 'GET'])
+def user_login():
+    try:
+        if request.method == "POST":
+            data = request.json
+            user = fb_service.login(data)
+            res = Response.new_response(user)
+            return jsonify(res.__dict__), 200
+        if request.method == "GET":
+            """this is used in the api as parameters"""
+            user = {"id": request.args.get('phone_number')}
+            data = fb_service.login(user)
+            if data is None:
+                return jsonify(
+                    Response.new_error("id not found", 404).__dict__), 404
+            res = Response.new_response(data)
+            return jsonify(res.__dict__), 200
+    except Exception as e:
+        res = Response.new_error(str(e), 500)
+        return jsonify(res.__dict__), 500
+
+
 port = int(os.environ.get('PORT', 5000))
 if __name__ == '__main__':
     app.run(threaded=True, host='localhost', port=port)

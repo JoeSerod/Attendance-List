@@ -18,3 +18,6 @@ class FireStoreService:
 
     def create_user(self, json):
         self.user_ref.document(json['phone_number']).set(json)
+
+    def login(self, json):
+        res = self.user_ref.document(json['phone_number']).get(json)
