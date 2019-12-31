@@ -23,6 +23,11 @@ def index():
     return render_template("login.html")
 
 
+@app.route('/signin', methods=["GET","POST"])
+def signin():
+    return render_template("signin.html")
+
+
 @app.route('/product/create', methods=["GET", "POST"])
 def create_product():
     if request.method == "GET":
