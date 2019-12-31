@@ -8,6 +8,7 @@ from flask import Flask, request, jsonify, render_template, redirect, url_for
 from configuration.firebase_manager import FireStoreService
 
 
+
 headers = {'Content-Type': "application/json", 'Accept': "application/json"}
 app = Flask(__name__)
 fb_service = FireStoreService()
@@ -19,7 +20,7 @@ def index():
     View for the landing page.
     :return: redirection to product listings.
     """
-    return render_template("index.html")
+    return render_template("login.html")
 
 
 @app.route('/product/create', methods=["GET", "POST"])
