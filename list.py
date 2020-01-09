@@ -20,12 +20,18 @@ def index():
     View for the landing page.
     :return: redirection to product listings.
     """
+    return render_template("index.html")
+
+@app.route('/login', methods=["GET", "POST"])
+def login():
+    """
+    View for the landing page.
+    :return: redirection to product listings.
+    """
     return render_template("login.html")
 
 
-@app.route('/signin', methods=["GET","POST"])
-def signin():
-    return render_template("signin.html")
+
 
 
 @app.route('/product/create', methods=["GET", "POST"])
@@ -60,14 +66,14 @@ def api_create_product():
         return jsonify(res.__dict__), 500
 
 
-@app.route('/user/create', methods=["GET", "POST"])
-def create_user():
+@app.route('/create', methods=["GET","POST"])
+def signin():
     if request.method == "GET":
 
         return render_template("signin.html")
     if request.method == "POST":
         form = request.form
-        new_product = User(form['phone_number'], form['name'],
+        new_product = User(form['username'], form['name'],
                            form['last_name'],
                            form['e_mail'], form['password'])
         print(new_product)
@@ -78,6 +84,8 @@ def create_user():
             return redirect(url_for('index')) # redirect to index
         else:
             return jsonify(res), 500  # returns json error
+
+
 
 
 @app.route('/api/user/create', methods=["POST"])
